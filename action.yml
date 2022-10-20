@@ -3,7 +3,7 @@ description: Installs the ABQ CLI
 author: RWX
 runs:
   using: node16
-  main: dist/index.js
+  main: dist/main.js
 inputs:
   version:
     description: |
