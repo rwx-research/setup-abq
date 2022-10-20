@@ -6582,7 +6582,7 @@ const tc = __importStar(__nccwpck_require__(7784));
 function getOs() {
     switch (process.platform) {
         default: {
-            return process.arch;
+            return process.platform;
         }
     }
 }

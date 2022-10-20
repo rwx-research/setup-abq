@@ -5,7 +5,7 @@ import * as tc from '@actions/tool-cache'
 function getOs() {
   switch (process.platform) {
     default: {
-      return process.arch
+      return process.platform
     }
   }
 }
