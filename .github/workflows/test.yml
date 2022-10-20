@@ -13,6 +13,4 @@ jobs:
         version: latest
         abq-token: ${{ secrets.ABQ_API_KEY }}
     - run: |
-        which abq
-        echo $PATH
-
+        which abq; echo $PATH
