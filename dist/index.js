@@ -6606,7 +6606,9 @@ function run() {
         core.debug(`fetching ${downloadUrl}`);
         const abqTar = yield tc.downloadTool(downloadUrl, 
         /* dest */ undefined, `Bearer ${apiToken}`);
-        const abqFolder = yield tc.extractTar(abqTar);
+        const abqFolder = yield tc.extractTar(abqTar, 
+        /* dest */ undefined, 
+        /* flags */ ['--strip-components=1']);
         core.addPath(abqFolder);
     });
 }

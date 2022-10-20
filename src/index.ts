@@ -33,7 +33,10 @@ async function run() {
   const abqTar = await tc.downloadTool(
       downloadUrl,
       /* dest */ undefined, `Bearer ${apiToken}`)
-  const abqFolder = await tc.extractTar(abqTar)
+  const abqFolder = await tc.extractTar(
+      abqTar,
+      /* dest */ undefined,
+      /* flags */['--strip-components=1'])
 
   core.addPath(abqFolder)
 }
