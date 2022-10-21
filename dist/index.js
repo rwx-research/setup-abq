@@ -6608,7 +6608,7 @@ function run() {
         /* dest */ undefined, `Bearer ${apiToken}`);
         const abqFolder = yield tc.extractTar(abqTar, 
         /* dest */ undefined, 
-        /* flags */ ['-xf', '--strip-components=1']);
+        /* flags */ ['-xf', '-M', '--strip-components=1']);
         core.addPath(abqFolder);
     });
 }
