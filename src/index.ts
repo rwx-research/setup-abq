@@ -36,7 +36,7 @@ async function run() {
   const abqFolder = await tc.extractTar(
       abqTar,
       /* dest */ undefined,
-      /* flags */['xf', '--strip-components=1'])
+      /* flags */['-xf', '--strip-components=1'])
 
   core.addPath(abqFolder)
 }
