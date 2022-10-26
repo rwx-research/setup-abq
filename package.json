@@ -3,15 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "description": "This action uploads artifacts, including test results, into Captain.",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "format": "prettier --write '**/*.ts'",
-    "format-check": "prettier --check '**/*.ts'",
-    "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
-    "test": "false",
-    "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
+    "build": "ncc build -o dist src/index.ts",
+    "test": "false"
   },
   "repository": {
     "type": "git",
