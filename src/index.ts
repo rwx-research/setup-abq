@@ -27,16 +27,18 @@ async function run() {
   const os = getOs()
   const arch = getArch()
 
-  const downloadUrl = `https://captain.build/abq/api/releases/${version}/abq_${
-      version}_${os}_${arch}.tar.gz`
+  const downloadUrl = `https://abq.build/abq/api/releases/${version}/abq_${version}_${os}_${arch}.tar.gz`
   core.debug(`fetching ${downloadUrl}`)
   const abqTar = await tc.downloadTool(
-      downloadUrl,
-      /* dest */ undefined, `Bearer ${apiToken}`)
+    downloadUrl,
+    /* dest */ undefined,
+    `Bearer ${apiToken}`
+  )
   const abqFolder = await tc.extractTar(
-      abqTar,
-      /* dest */ undefined,
-      /* flags */['-xv', '--strip-components=1'])
+    abqTar,
+    /* dest */ undefined,
+    /* flags */ ['-xv', '--strip-components=1']
+  )
 
   core.addPath(abqFolder)
 }
