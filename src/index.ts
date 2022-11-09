@@ -27,7 +27,7 @@ async function run() {
   const os = getOs()
   const arch = getArch()
 
-  const downloadUrl = `https://abq.build/abq/api/releases/${version}/abq_${version}_${os}_${arch}.tar.gz`
+  const downloadUrl = `https://abq.build/api/releases/${version}/abq_${version}_${os}_${arch}.tar.gz`
   core.debug(`fetching ${downloadUrl}`)
   const abqTar = await tc.downloadTool(
     downloadUrl,
