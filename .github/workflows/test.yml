@@ -3,14 +3,22 @@ on:
   - push
 
 jobs:
+  test_with_abq_token__deprecated:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./
+      with:
+        abq-token: ${{ secrets.RWX_ACCESS_TOKEN }}
+    - run: |
+        abq help
+
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout sources
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
     - uses: ./
       with:
-        version: latest
-        abq-token: ${{ secrets.ABQ_API_KEY }}
+        access-token: ${{ secrets.RWX_ACCESS_TOKEN }}
     - run: |
-        abq help
+        abq --version | grep '^abq 0\.'
