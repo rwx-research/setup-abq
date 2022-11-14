@@ -22,8 +22,8 @@ function getArch() {
 }
 
 async function run() {
-  const apiToken = core.getInput('abq-token')
-  const version = core.getInput('version')
+  const accessToken = core.getInput('access-token') || core.getInput('abq-token')
+  const version = 'v1'
   const os = getOs()
   const arch = getArch()
 
@@ -32,7 +32,7 @@ async function run() {
   const abqTar = await tc.downloadTool(
     downloadUrl,
     /* dest */ undefined,
-    `Bearer ${apiToken}`
+    `Bearer ${accessToken}`
   )
   const abqFolder = await tc.extractTar(
     abqTar,

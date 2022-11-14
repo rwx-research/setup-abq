@@ -1,17 +1,19 @@
 name: Set up ABQ
 description: Installs the ABQ CLI
 author: RWX
+branding:
+  icon: database
+  color: green
 runs:
   using: node16
   main: dist/index.js
 inputs:
-  version:
-    description: |
-      Version of the ABQ CLI to install.
-      Must either be "latest" or a semver identifier of the form "<major>.<minor>.<patch>"
-    default: latest
-    required: false
   abq-token:
     description: |
-      ABQ API token.
-    required: true
+      Deprecated ABQ API token.
+    required: false
+  access-token:
+    description: |
+      RWX Access Token.
+      See https://www.rwx.com/docs/access-tokens
+    required: false

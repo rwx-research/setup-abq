@@ -6598,14 +6598,14 @@ function getArch() {
 }
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        const apiToken = core.getInput('abq-token');
-        const version = core.getInput('version');
+        const accessToken = core.getInput('access-token') || core.getInput('abq-token');
+        const version = 'v1';
         const os = getOs();
         const arch = getArch();
         const downloadUrl = `https://abq.build/api/releases/${version}/abq_${version}_${os}_${arch}.tar.gz`;
         core.debug(`fetching ${downloadUrl}`);
         const abqTar = yield tc.downloadTool(downloadUrl, 
-        /* dest */ undefined, `Bearer ${apiToken}`);
+        /* dest */ undefined, `Bearer ${accessToken}`);
         const abqFolder = yield tc.extractTar(abqTar, 
         /* dest */ undefined, 
         /* flags */ ['-xv', '--strip-components=1']);
