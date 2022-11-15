@@ -8,12 +8,8 @@ runs:
   using: node16
   main: dist/index.js
 inputs:
-  abq-token:
-    description: |
-      Deprecated ABQ API token.
-    required: false
   access-token:
     description: |
       RWX Access Token.
       See https://www.rwx.com/docs/access-tokens
-    required: false
+    required: true

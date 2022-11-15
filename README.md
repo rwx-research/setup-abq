@@ -1,6 +1,6 @@
 # setup-abq
 
-This is a GitHub action for using setting up `abq`.
+This is a GitHub action for installing `abq`.
 
 ## Inputs
 
