@@ -22,12 +22,13 @@ function getArch() {
 }
 
 async function run() {
-  const accessToken = core.getInput('access-token') || core.getInput('abq-token')
-  const version = 'v1'
+  const accessToken =
+    core.getInput('access-token') || core.getInput('abq-token')
+  const releaseChannel = 'v1'
   const os = getOs()
   const arch = getArch()
 
-  const downloadUrl = `https://abq.build/api/releases/${version}/abq_${version}_${os}_${arch}.tar.gz`
+  const downloadUrl = `https://abq.build/api/releases/${releaseChannel}?os=${os}&arch=${arch}`
   core.debug(`fetching ${downloadUrl}`)
   const abqTar = await tc.downloadTool(
     downloadUrl,
