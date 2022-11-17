@@ -1,5 +1,4 @@
 import * as core from '@actions/core'
-import * as http from '@actions/http-client'
 import * as tc from '@actions/tool-cache'
 
 function getOs() {
@@ -21,14 +20,22 @@ function getArch() {
   }
 }
 
+function getRunId() {
+  const runId = process.env.GITHUB_RUN_ID
+  const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1'
+
+  return `${runId}-${runAttempt}`
+}
+
 async function run() {
   const accessToken =
     core.getInput('access-token') || core.getInput('abq-token')
   const releaseChannel = 'v1'
   const os = getOs()
   const arch = getArch()
+  const runId = getRunId()
 
-  const downloadUrl = `https://abq.build/api/releases/${releaseChannel}?os=${os}&arch=${arch}`
+  const downloadUrl = `https://abq.build/api/releases/${releaseChannel}?os=${os}&arch=${arch}&run_id=${runId}`
   core.debug(`fetching ${downloadUrl}`)
   const abqTar = await tc.downloadTool(
     downloadUrl,
