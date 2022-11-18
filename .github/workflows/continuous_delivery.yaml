@@ -1,0 +1,42 @@
+name: Continuous Delivery
+run-name: Tag new release
+on:
+  workflow_run:
+    workflows:
+      - Continuous Integration
+    branches:
+      - v1
+    types:
+      - completed
+jobs:
+  push-tags:
+    name: Push tags
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v18
+        with:
+          extra_nix_config: |
+            keep-derivations = true
+            keep-outputs = true
+      - run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+          version=$(npm -j list setup-abq | jq -r .version)
+          majorMinor=$(echo $version | awk -F '.' '{print $1 "." $2}')
+
+          git tag "v$version"
+          git tag "v$majorMinor"
+          git push --force --tags
+
+          echo "newReleaseTag=v$version" >> $GITHUB_ENV
+      - uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.newReleaseTag }}
+          release_name: Release ${{ env.newReleaseTag }}
+          draft: false
+          prerelease: contains(env.newReleaseTag, "-")

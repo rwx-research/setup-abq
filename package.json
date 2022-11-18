@@ -5,8 +5,7 @@
   "description": "This action installs the abq binary.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build -o dist src/index.ts",
-    "test": "false"
+    "build": "ncc build -o dist src/index.ts"
   },
   "repository": {
     "type": "git",
