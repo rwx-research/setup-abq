@@ -6603,7 +6603,7 @@ function getRunId() {
 }
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        const accessToken = core.getInput('access-token') || core.getInput('abq-token');
+        const accessToken = core.getInput('access-token');
         const releaseChannel = 'v1';
         const os = getOs();
         const arch = getArch();

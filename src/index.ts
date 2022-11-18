@@ -28,8 +28,7 @@ function getRunId() {
 }
 
 async function run() {
-  const accessToken =
-    core.getInput('access-token') || core.getInput('abq-token')
+  const accessToken = core.getInput('access-token')
   const releaseChannel = 'v1'
   const os = getOs()
   const arch = getArch()
