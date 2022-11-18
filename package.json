@@ -1,12 +1,11 @@
 {
   "name": "setup-abq",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "This action installs the abq binary.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build -o dist src/index.ts",
-    "test": "false"
+    "build": "ncc build -o dist src/index.ts"
   },
   "repository": {
     "type": "git",
