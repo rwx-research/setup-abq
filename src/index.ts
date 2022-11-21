@@ -29,7 +29,16 @@ function getRunId() {
 
 async function run() {
   const accessToken = core.getInput('access-token')
-  const releaseChannel = 'v1'
+  if (!accessToken || accessToken.trim().length === 0) {
+    core.setFailed("`access-token` field can't be empty.")
+  }
+
+  const releaseChannel = core.getInput('release-channel') || 'v1'
+  if (!['v1', 'latest'].includes(releaseChannel)) {
+    core.setFailed(
+      `Invalid \`release-channel\` field: ${releaseChannel}. \`release-channel\` must be "v1" or "latest" (default is "v1").`
+    )
+  }
   const os = getOs()
   const arch = getArch()
   const runId = getRunId()
