@@ -34,9 +34,9 @@ async function run() {
   }
 
   const releaseChannel = core.getInput('release-channel') || 'v1'
-  if (!['v1', 'latest', 'unstable'].includes(releaseChannel)) {
+  if (!['v1', 'unstable'].includes(releaseChannel)) {
     core.setFailed(
-      `Invalid \`release-channel\` field: ${releaseChannel}. \`release-channel\` must be "v1" or "unstable" (default is "v1").`
+      `Invalid \`release-channel\` field: ${releaseChannel}. \`release-channel\` must be "v1".`
     )
   }
   const os = getOs()
