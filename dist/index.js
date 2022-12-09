@@ -6597,6 +6597,10 @@ function getArch() {
     }
 }
 function getRunId() {
+    const providedRunId = core.getInput('run-id');
+    if (providedRunId && providedRunId.trim().length > 0) {
+        return providedRunId.trim();
+    }
     const runId = process.env.GITHUB_RUN_ID;
     const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1';
     return `${runId}-${runAttempt}`;
