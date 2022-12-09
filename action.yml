@@ -13,3 +13,13 @@ inputs:
       RWX Access Token.
       See https://www.rwx.com/docs/access-tokens
     required: true
+  release-channel:
+    description: |
+      ABQ Release Channel.
+    required: false
+    default: v1
+  run-id:
+    description: |
+      Unique run attempt ID. One will be generated from the GitHub
+      RUN_ID and RUN_ATTEMPT if available.
+    required: false
