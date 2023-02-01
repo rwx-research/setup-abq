@@ -1,2 +1,5 @@
 node_modules
 .direnv
+# yarn run build and npm run build produce different outputs.
+# right now, CI only supports building with npm. So we disallow yarn.lock to nudge contributors to use npm.
+yarn.lock
