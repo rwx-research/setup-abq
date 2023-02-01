@@ -19,7 +19,4 @@ inputs:
     required: false
     default: v1
   run-id:
-    description: |
-      Unique run attempt ID. One will be generated from the GitHub
-      RUN_ID and RUN_ATTEMPT if available.
-    required: false
+    deprecationMessage: "This is no longer used and can be safely removed from your action usage."
