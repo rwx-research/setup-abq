@@ -6596,11 +6596,7 @@ function getArch() {
         }
     }
 }
-function getRunId() {
-    const providedRunId = core.getInput('run-id');
-    if (providedRunId && providedRunId.trim().length > 0) {
-        return providedRunId.trim();
-    }
+function getInstallId() {
     const runId = process.env.GITHUB_RUN_ID;
     const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1';
     return `${runId}-${runAttempt}`;
@@ -6617,8 +6613,8 @@ function run() {
         }
         const os = getOs();
         const arch = getArch();
-        const runId = getRunId();
-        const downloadUrl = `https://abq.build/api/releases/${releaseChannel}?os=${os}&arch=${arch}&run_id=${runId}`;
+        const installId = getInstallId();
+        const downloadUrl = `https://abq.build/api/releases/${releaseChannel}?os=${os}&arch=${arch}&install_id=${installId}`;
         core.debug(`fetching ${downloadUrl}`);
         const abqTar = yield tc.downloadTool(downloadUrl, 
         /* dest */ undefined, `Bearer ${accessToken}`);
