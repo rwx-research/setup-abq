@@ -18,3 +18,5 @@ inputs:
       ABQ Release Channel.
     required: false
     default: v1
+  run-id:
+    deprecationMessage: "This is no longer used and can be safely removed from your action usage."
