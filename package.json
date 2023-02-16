@@ -1,11 +1,15 @@
 {
   "name": "setup-abq",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": true,
   "description": "This action installs the abq binary.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build -o dist src/index.ts"
+    "build": "ncc build -o dist src/index.ts",
+    "build-check": "npm run build && test -z \"$(git status --porcelain)\"",
+    "lint": "npx prettier --write 'src/**/*.ts'",
+    "lint-check": "npx prettier --check 'src/**/*.ts'",
+    "test": "npm run lint-check && npm run build-check"
   },
   "repository": {
     "type": "git",

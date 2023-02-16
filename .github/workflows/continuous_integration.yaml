@@ -2,8 +2,8 @@ name: Continuous Integration
 on:
   push:
 jobs:
-  type-check:
-    name: Type check
+  test-dist-checked-in:
+    name: Test that build passes & updated dist/index.js is checked in
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,10 +13,8 @@ jobs:
             keep-derivations = true
             keep-outputs = true
       - run: |
-          mv dist/index.js dist/index.old.$GITHUB_RUN_ID.$GITHUB_RUN_NUMBER.js
           nix develop --command npm clean-install
-          nix develop --command npm run build
-          diff dist/index.old.$GITHUB_RUN_ID.$GITHUB_RUN_NUMBER.js dist/index.js
+          nix develop --command npm run build-check
 
   test_default_version:
     runs-on: ubuntu-latest
@@ -38,5 +36,5 @@ jobs:
             keep-derivations = true
             keep-outputs = true
       - run: nix develop --command npm clean-install
-      - run: nix develop --command npx prettier --check "src/**/*.ts"
+      - run: nix develop --command npm run lint-check
       - run: nix fmt -- --check flake.nix

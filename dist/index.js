@@ -6578,6 +6578,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
+const exec = __importStar(__nccwpck_require__(1514));
 const tc = __importStar(__nccwpck_require__(7784));
 function getOs() {
     switch (process.platform) {
@@ -6614,14 +6615,18 @@ function run() {
         const os = getOs();
         const arch = getArch();
         const installId = getInstallId();
-        const downloadUrl = `https://abq.build/api/releases/${releaseChannel}?os=${os}&arch=${arch}&install_id=${installId}`;
-        core.debug(`fetching ${downloadUrl}`);
-        const abqTar = yield tc.downloadTool(downloadUrl, 
+        const url = `https://abq.build/api/releases/${releaseChannel}/${os}/${arch}/abq?install_id=${installId}`;
+        core.debug(`Fetching ${url}`);
+        const abq = yield tc.downloadTool(url, 
         /* dest */ undefined, `Bearer ${accessToken}`);
-        const abqFolder = yield tc.extractTar(abqTar, 
-        /* dest */ undefined, 
-        /* flags */ ['-xv', '--strip-components=1']);
-        core.addPath(abqFolder);
+        const destination = '/usr/local/bin/abq';
+        core.debug(`Installing to ${destination}`);
+        yield exec.exec('install', [abq, destination]);
+        const { stdout } = yield exec.getExecOutput('abq', ['--version'], {
+            silent: true
+        });
+        const cliVersion = stdout.replace('\n', '');
+        core.info(`abq ${cliVersion} is installed`);
     });
 }
 run().catch(err => core.setFailed(err));
