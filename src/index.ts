@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import * as exec from '@actions/exec'
 import * as tc from '@actions/tool-cache'
 
 function getOs() {
@@ -43,20 +44,25 @@ async function run() {
   const arch = getArch()
   const installId = getInstallId()
 
-  const downloadUrl = `https://abq.build/api/releases/${releaseChannel}?os=${os}&arch=${arch}&install_id=${installId}`
-  core.debug(`fetching ${downloadUrl}`)
-  const abqTar = await tc.downloadTool(
-    downloadUrl,
+  const url = `https://abq.build/api/releases/${releaseChannel}/${os}/${arch}/abq?install_id=${installId}`
+
+  core.debug(`Fetching ${url}`)
+  const abq = await tc.downloadTool(
+    url,
     /* dest */ undefined,
     `Bearer ${accessToken}`
   )
-  const abqFolder = await tc.extractTar(
-    abqTar,
-    /* dest */ undefined,
-    /* flags */ ['-xv', '--strip-components=1']
-  )
 
-  core.addPath(abqFolder)
+  const destination = '/usr/local/bin/abq'
+  core.debug(`Installing to ${destination}`)
+  await exec.exec('install', [abq, destination])
+
+  const {stdout} = await exec.getExecOutput('abq', ['--version'], {
+    silent: true
+  })
+  const cliVersion = stdout.replace('\n', '')
+
+  core.info(`abq ${cliVersion} is installed`)
 }
 
 run().catch(err => core.setFailed(err))
