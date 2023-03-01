@@ -35,7 +35,7 @@ async function run() {
   }
 
   const releaseChannel = core.getInput('release-channel') || 'v1'
-  if (typeof releaseChannel !== "string") {
+  if (typeof releaseChannel !== 'string') {
     core.setFailed(
       `Invalid \`release-channel\` field: ${releaseChannel}. Did you mean to specify "v1"?`
     )
