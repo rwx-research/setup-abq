@@ -6609,8 +6609,8 @@ function run() {
             core.setFailed("`access-token` field can't be empty.");
         }
         const releaseChannel = core.getInput('release-channel') || 'v1';
-        if (!['v1', 'unstable'].includes(releaseChannel)) {
-            core.setFailed(`Invalid \`release-channel\` field: ${releaseChannel}. \`release-channel\` must be "v1".`);
+        if (typeof releaseChannel !== 'string') {
+            core.setFailed(`Invalid \`release-channel\` field: ${releaseChannel}. Did you mean to specify "v1"?`);
         }
         const os = getOs();
         const arch = getArch();
