@@ -21,11 +21,11 @@ function getArch() {
   }
 }
 
-function getInstallId() {
+function getInstallId(releaseChannel: string) {
   const runId = process.env.GITHUB_RUN_ID
   const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1'
 
-  return `${runId}-${runAttempt}`
+  return `${runId}-${runAttempt}-${releaseChannel}`
 }
 
 async function run() {
@@ -42,7 +42,7 @@ async function run() {
   }
   const os = getOs()
   const arch = getArch()
-  const installId = getInstallId()
+  const installId = getInstallId(releaseChannel)
 
   const url = `https://abq.build/api/releases/${releaseChannel}/${os}/${arch}/abq?install_id=${installId}`
 
