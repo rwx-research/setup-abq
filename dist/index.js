@@ -6599,8 +6599,7 @@ function getArch() {
 }
 function getInstallId(releaseChannel) {
     const runId = process.env.GITHUB_RUN_ID;
-    const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1';
-    return `${runId}-${runAttempt}-${releaseChannel}`;
+    return `${runId}-${releaseChannel}`;
 }
 function run() {
     return __awaiter(this, void 0, void 0, function* () {

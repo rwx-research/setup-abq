@@ -23,9 +23,8 @@ function getArch() {
 
 function getInstallId(releaseChannel: string) {
   const runId = process.env.GITHUB_RUN_ID
-  const runAttempt = process.env.GITHUB_RUN_ATTEMPT || '1'
 
-  return `${runId}-${runAttempt}-${releaseChannel}`
+  return `${runId}-${releaseChannel}`
 }
 
 async function run() {
