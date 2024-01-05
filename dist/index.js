@@ -6614,7 +6614,7 @@ function run() {
         const os = getOs();
         const arch = getArch();
         const installId = getInstallId(releaseChannel);
-        const url = `https://abq.build/api/releases/${releaseChannel}/${os}/${arch}/abq?install_id=${installId}`;
+        const url = `https://cloud.rwx.com/abq/api/releases/${releaseChannel}/${os}/${arch}/abq?install_id=${installId}`;
         core.debug(`Fetching ${url}`);
         const abq = yield tc.downloadTool(url, 
         /* dest */ undefined, `Bearer ${accessToken}`);
