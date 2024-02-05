@@ -6,7 +6,7 @@ jobs:
     name: Test that build passes & updated dist/index.js is checked in
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: |
@@ -19,7 +19,7 @@ jobs:
   test_default_version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./
         with:
           access-token: ${{ secrets.RWX_ACCESS_TOKEN }}
@@ -29,7 +29,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v18
         with:
           extra_nix_config: |
