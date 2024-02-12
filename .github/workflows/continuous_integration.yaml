@@ -7,14 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v18
+      - uses: actions/setup-node@v4
         with:
-          extra_nix_config: |
-            keep-derivations = true
-            keep-outputs = true
-      - run: |
-          nix develop --command npm clean-install
-          nix develop --command npm run build-check
+          node-version-file: .node-version
+          cache: npm
+      - run: npm install
+      - run: npm run build-check
 
   test_default_version:
     runs-on: ubuntu-latest
@@ -30,11 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v18
+      - uses: actions/setup-node@v4
         with:
-          extra_nix_config: |
-            keep-derivations = true
-            keep-outputs = true
-      - run: nix develop --command npm clean-install
-      - run: nix develop --command npm run lint-check
-      - run: nix fmt -- --check flake.nix
+          node-version-file: .node-version
+          cache: npm
+      - run: npm install
+      - run: npm run lint-check
