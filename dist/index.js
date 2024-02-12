@@ -558,7 +558,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {
@@ -13895,7 +13895,7 @@ const { Blob, File: NativeFile } = __nccwpck_require__(4300)
 const { kBodyUsed } = __nccwpck_require__(2785)
 const assert = __nccwpck_require__(9491)
 const { isErrored } = __nccwpck_require__(3983)
-const { isUint8Array, isArrayBuffer } = __nccwpck_require__(4978)
+const { isUint8Array, isArrayBuffer } = __nccwpck_require__(9830)
 const { File: UndiciFile } = __nccwpck_require__(8511)
 const { parseMIMEType, serializeAMimeType } = __nccwpck_require__(685)
 
@@ -20265,7 +20265,7 @@ const { getGlobalOrigin } = __nccwpck_require__(1246)
 const { performance } = __nccwpck_require__(4074)
 const { isBlobLike, toUSVString, ReadableStreamFrom } = __nccwpck_require__(3983)
 const assert = __nccwpck_require__(9491)
-const { isUint8Array } = __nccwpck_require__(4978)
+const { isUint8Array } = __nccwpck_require__(9830)
 
 // https://nodejs.org/api/crypto.html#determining-if-crypto-support-is-unavailable
 /** @type {import('crypto')|undefined} */
@@ -28661,14 +28661,6 @@ run().catch(err => core.setFailed(err));
 
 /***/ }),
 
-/***/ 4978:
-/***/ ((module) => {
-
-module.exports = eval("require")("util/types");
-
-
-/***/ }),
-
 /***/ 9491:
 /***/ ((module) => {
 
@@ -28882,6 +28874,14 @@ module.exports = require("url");
 
 "use strict";
 module.exports = require("util");
+
+/***/ }),
+
+/***/ 9830:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("util/types");
 
 /***/ }),
 
