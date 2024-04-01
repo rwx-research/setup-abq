@@ -1,6 +1,6 @@
 {
   "name": "setup-abq",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "private": true,
   "description": "This action installs the abq binary.",
   "main": "dist/index.js",
