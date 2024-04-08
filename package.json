@@ -1,6 +1,6 @@
 {
   "name": "setup-abq",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "private": true,
   "description": "This action installs the abq binary.",
   "main": "dist/index.js",
@@ -30,8 +30,8 @@
     "@actions/tool-cache": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "7.24.3",
-    "@babel/preset-env": "7.24.3",
+    "@babel/core": "7.24.4",
+    "@babel/preset-env": "7.24.4",
     "@babel/preset-typescript": "7.24.1",
     "@types/jest": "29.5.12",
     "@types/node": "^20.11.10",
