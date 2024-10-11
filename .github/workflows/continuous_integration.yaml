@@ -14,8 +14,17 @@ jobs:
       - run: npm install
       - run: npm run build-check
 
-  test_default_version:
+  test-default-version-x86:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          access-token: ${{ secrets.RWX_ACCESS_TOKEN }}
+      - run: abq --version | grep '^abq 1\.'
+
+  test-default-version-arm:
+    runs-on: testing-arm
     steps:
       - uses: actions/checkout@v4
       - uses: ./
