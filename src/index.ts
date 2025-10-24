@@ -13,7 +13,10 @@ function getOs() {
 function getArch() {
   switch (process.arch) {
     case 'x64': {
-      return 'x86-64'
+      return 'x86_64'
+    }
+    case 'arm64': {
+      return 'aarch64'
     }
     default: {
       return process.arch
