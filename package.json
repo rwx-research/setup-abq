@@ -30,7 +30,7 @@
     "@actions/tool-cache": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "7.24.7",
+    "@babel/core": "7.29.6",
     "@babel/preset-env": "7.24.7",
     "@babel/preset-typescript": "7.24.7",
     "@types/jest": "29.5.12",
