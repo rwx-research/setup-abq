@@ -4,9 +4,6 @@ author: RWX
 branding:
   icon: database
   color: green
-runs:
-  using: node24
-  main: dist/index.js
 inputs:
   access-token:
     description: |
@@ -20,3 +17,41 @@ inputs:
     default: v1
   run-id:
     deprecationMessage: "This is no longer used and can be safely removed from your action usage."
+runs:
+  using: composite
+  steps:
+    - name: Install ABQ CLI
+      shell: bash
+      env:
+        ACCESS_TOKEN: ${{ inputs.access-token }}
+        RELEASE_CHANNEL: ${{ inputs.release-channel }}
+      run: |
+        access_token="$ACCESS_TOKEN"
+        if [[ -z "${access_token// }" ]]; then
+          echo "::error::\`access-token\` field can't be empty."
+          exit 1
+        fi
+
+        release_channel="${RELEASE_CHANNEL:-v1}"
+
+        # Detect OS
+        os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+
+        # Detect architecture
+        arch="$(uname -m)"
+        if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
+          arch="aarch64"
+        fi
+
+        install_id="${GITHUB_RUN_ID}-${release_channel}"
+
+        url="https://cloud.rwx.com/abq/api/releases/${release_channel}/${os}/${arch}/abq?install_id=${install_id}"
+
+        echo "Fetching $url"
+        curl -fsSL -H "Authorization: Bearer ${access_token}" "$url" -o /tmp/abq
+
+        echo "Installing to /usr/local/bin/abq"
+        install /tmp/abq /usr/local/bin/abq
+
+        cli_version="$(abq --version)"
+        echo "abq $cli_version is installed"
