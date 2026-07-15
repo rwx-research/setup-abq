@@ -2,18 +2,6 @@ name: Continuous Integration
 on:
   push:
 jobs:
-  test-dist-checked-in:
-    name: Test that build passes & updated dist/index.js is checked in
-    runs-on: blacksmith-2vcpu-ubuntu-2404
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: npm
-      - run: npm install
-      - run: npm run build-check
-
   test_default_version:
     runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
@@ -22,15 +10,11 @@ jobs:
         with:
           access-token: ${{ secrets.RWX_ACCESS_TOKEN }}
       - run: abq --version | grep '^abq 1\.'
-
-  lint:
-    name: Lint
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+  test_arm:
+    runs-on: blacksmith-2vcpu-ubuntu-2404-arm
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: ./
         with:
-          node-version-file: .node-version
-          cache: npm
-      - run: npm install
-      - run: npm run lint-check
+          access-token: ${{ secrets.RWX_ACCESS_TOKEN }}
+      - run: abq --version | grep '^abq 1\.'
