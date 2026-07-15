@@ -7,7 +7,7 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2404
     if: ${{ github.base_ref == 'v1' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: |
           # Read the version from the `version` file, falling back to
           # package.json for backwards compatibility with older revisions of
