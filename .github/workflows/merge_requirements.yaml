@@ -9,10 +9,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          newVersion=$(cat version)
+          # Read the version from the `version` file, falling back to
+          # package.json for backwards compatibility with older revisions of
+          # the v1 branch that predate the JavaScript-to-bash conversion.
+          read_version() {
+            if [[ -f version ]]; then
+              cat version
+            else
+              jq -r .version package.json
+            fi
+          }
+
+          newVersion=$(read_version)
           majorVersion=$(echo $newVersion | awk -F '.' '{print $1}')
           git fetch && git checkout origin/v1
-          oldVersion=$(cat version)
+          oldVersion=$(read_version)
           latestVersion=$(echo "$newVersion $oldVersion" | sed 's/\ /\n/' | sort -rV | head -n 1)
 
           if [[ "$majorVersion" != "1" ]]; then
