@@ -10,3 +10,11 @@ jobs:
         with:
           access-token: ${{ secrets.RWX_ACCESS_TOKEN }}
       - run: abq --version | grep '^abq 1\.'
+  test_arm:
+    runs-on: blacksmith-2vcpu-ubuntu-2404-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          access-token: ${{ secrets.RWX_ACCESS_TOKEN }}
+      - run: abq --version | grep '^abq 1\.'
